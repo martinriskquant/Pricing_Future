@@ -12,7 +12,7 @@ Future price = Spot price + Cost of buying now - Benefit of buying now
 2. Commodity Future
 
 -------------------------------------------------------------------------------------------------------------------  
-Not indsutry practise (just textbook knowlegde, it is a "sticky" spread , below model only care about the hedging cost ) 
+Not indsutry practise (just textbook knowlegde, it is a "sticky" spread , below model only care about the hedging cost ) \
 Tv = ( bid price + ask price )/2 
 - Bid price --> the max price willing to buy future --> implied short stock (short sales stock)
   - Paying the borrowing cost of stock (short sales borrowing cost)
@@ -28,5 +28,21 @@ Bid price = Spot price + (short sales borrowing cost + dividend) - (interest of 
 Ask price = Spot price + (financing cost) - dividend
 
 ---------------------------------------------------------------------------------------------------------------------
-Possible industry practise of quoting the future contract:
-Bid/Ask price = TV + spread ( i.e. hedging cost,
+Industry practise of quoting the future contract:
+
+Bid quote = TV - Spread function/2 \
+Ask quote = TV + Spread function/2
+
+TV = ( MidPriceₜ× Forecastₜ × Scaling) + InventorySkewₜ \
+Remark:
+- MidPriceₜ: midpoint of best bid and ask in the market.
+- Forecastₜ: model estimate of relative fair value vs. market (e.g. expected drift, short-term alpha).
+- Scaling: adjustment to normalize forecast into price space (think: converting z-score or expected return into basis points).
+- InventorySkewₜ: bias adjustment to manage position inventory (e.g. if long, shift FV down to encourage selling).
+
+Spread function = f(Risk,MarketSpreadₜ,Aggressiveness)\
+Remark:
+- where f= α⋅MarketSpreadₜ + β⋅RiskPenalty − γ⋅AggressionFactor  (α, β, γ: tunable coefficients.)
+- MarketSpreadₜ: observed bid–ask spread.
+- RiskPenalty: widens spread when volatility, inventory, or gamma exposure increases.
+- AggressionFactor: tightens spread when trying to capture flow or compete for order flow.
