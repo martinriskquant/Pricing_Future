@@ -46,3 +46,14 @@ Remark:
 - MarketSpreadₜ: observed bid–ask spread.
 - RiskPenalty: widens spread when volatility, inventory, or gamma exposure increases.
 - AggressionFactor: tightens spread when trying to capture flow or compete for order flow.
+
+Optional adjustment: \
+Remark:
+- Adverse selection penalty: widen quotes during momentum or when market depth thins out.
+- Latency buffer: add a time-decay penalty to prevent stale quotes.
+- Cross-asset skew: bias FV based on correlated assets or synthetic parity (e.g. ETF vs. basket).
+
+Your fair value is your model-adjusted midprice, including any intentional skew to manage your book.
+Your spread is a function of how risky it is to quote tightly and how aggressive you want to be.
+Your quotes are just that fair value plus/minus the spread.
+
